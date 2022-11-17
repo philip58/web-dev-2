@@ -3,11 +3,11 @@ import "./App.css";
 import Card from "./Card";
 
 const cardValues = [
-  { src: "/gold.png" },
-  { src: "/hito.png" },
-  { src: "/merry.png" },
-  { src: "/strawhat.png" },
-  { src: "/sun.png" },
+  { src: "/gold.png", match: false },
+  { src: "/hito.png", match: false },
+  { src: "/merry.png", match: false },
+  { src: "/strawhat.png", match: false },
+  { src: "/sun.png", match: false },
 ];
 
 function App() {
@@ -46,20 +46,29 @@ function App() {
   };
 
   useEffect(() => {
-    if(firstCard && secondCard)
-    {
-      if(firstCard.src === secondCard.src)
-      {
-        console.log("match")
+    if (firstCard && secondCard) {
+      if (firstCard.src === secondCard.src) {
+        setCardsArray(cards => {
+          return cards.map((Map) => {
+            if(Map.src === firstCard.src && Map.src === secondCard.src)
+            {
+              return (
+                {...Map, match: true});
+            }
+            else 
+            {
+              return Map;
+            }
+          })
+        })
         nextTurn();
-      }
-      else 
-      {
-        console.log("dont match")
+      } else {
         nextTurn();
       }
     }
-  },[firstCard,secondCard])
+  }, [firstCard, secondCard]);
+
+  console.log(cardsArray)
 
   return (
     <div className="App">
@@ -68,7 +77,10 @@ function App() {
 
       <div className="card-grid">
         {cardsArray.map((Map) => (
-          <Card key={Map.id} prop={Map} chooseCard={chooseCard}></Card>
+          <Card key={Map.id} prop={Map} 
+          chooseCard={chooseCard} 
+          isFlipped={Map.match === true || Map === firstCard || Map === secondCard}>
+          </Card>
         ))}
       </div>
     </div>
