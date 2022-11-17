@@ -48,9 +48,9 @@ function App() {
   };
 
   const nextTurn = () => {
+    setTurnsPassed((currentTurns) => currentTurns + 1);
     setFirstCard(null);
     setSecondCard(null);
-    setTurnsPassed((currentTurns) => currentTurns + 1);
     setDisableCard(false);
   };
 
@@ -73,7 +73,7 @@ function App() {
         })
         nextTurn();
       } else {
-        setTimeout(() => nextTurn(), 850);
+        setTimeout(() => nextTurn(), 500);
       }
     }
   }, [firstCard, secondCard]);
