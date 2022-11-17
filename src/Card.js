@@ -1,11 +1,14 @@
 import "./Card.css";
 
-function Card({prop}) {
+function Card({prop, chooseCard}) {
+    const click = () => {
+        chooseCard(prop);
+    }
     return (
   <div className="card">
     <div>
       <img className="front" src={prop.src} />
-      <img className="back" src="/back.png"/>
+      <img className="back" src="/back.png" onClick={click}/>
     </div>
   </div>
     )

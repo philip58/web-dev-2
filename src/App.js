@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Card from "./Card";
 
@@ -11,18 +11,55 @@ const cardValues = [
 ];
 
 function App() {
+  const [firstCard, setFirstCard] = useState(null);
+
+  const [secondCard, setSecondCard] = useState(null);
+
   const [cardsArray, setCardsArray] = useState([]);
+
+  const [turnsPassed, setTurnsPassed] = useState(0);
 
   const shuffle = () => {
     const newCardArray = [...cardValues, ...cardValues]
 
-      .sort(() => Math.random() - (.5))
+      .sort(() => Math.random() - 0.2)
 
       .map((cardMap) => ({ ...cardMap, id: Math.random() }));
 
     setCardsArray(newCardArray);
+
+    setTurnsPassed(0);
   };
 
+  const chooseCard = (choice) => {
+    if (firstCard === null) {
+      setFirstCard(choice);
+    } else {
+      setSecondCard(choice);
+    }
+  };
+
+  const nextTurn = () => {
+    setFirstCard(null);
+    setSecondCard(null);
+    setTurnsPassed((currentTurns) => currentTurns + 1);
+  };
+
+  useEffect(() => {
+    if(firstCard && secondCard)
+    {
+      if(firstCard.src === secondCard.src)
+      {
+        console.log("match")
+        nextTurn();
+      }
+      else 
+      {
+        console.log("dont match")
+        nextTurn();
+      }
+    }
+  },[firstCard,secondCard])
 
   return (
     <div className="App">
@@ -31,7 +68,7 @@ function App() {
 
       <div className="card-grid">
         {cardsArray.map((Map) => (
-          <Card key={Map.id} prop={Map} ></Card>
+          <Card key={Map.id} prop={Map} chooseCard={chooseCard}></Card>
         ))}
       </div>
     </div>
