@@ -11,6 +11,8 @@ const cardValues = [
 ];
 
 function App() {
+  useEffect(() => { shuffle(); },[]);
+
   const [firstCard, setFirstCard] = useState(null);
 
   const [secondCard, setSecondCard] = useState(null);
@@ -24,13 +26,17 @@ function App() {
   const shuffle = () => {
     const newCardArray = [...cardValues, ...cardValues]
 
-      .sort(() => Math.random() - 0.2)
+      .sort(() => Math.random() - 0.5)
 
       .map((cardMap) => ({ ...cardMap, id: Math.random() }));
 
     setCardsArray(newCardArray);
 
     setTurnsPassed(0);
+
+    setFirstCard(null);
+
+    setSecondCard(null);
   };
 
   const chooseCard = (choice) => {
@@ -76,6 +82,7 @@ function App() {
     <div className="App">
       <h1>Memory Game!</h1>
       <button onClick={shuffle}>New Game</button>
+      <p>Turns Passed: {turnsPassed} </p>
 
       <div className="card-grid">
         {cardsArray.map((Map) => (
