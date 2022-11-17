@@ -1,3 +1,4 @@
+import { useState } from "react";
 import "./App.css";
 import Card from "./Card";
 
@@ -10,13 +11,26 @@ const cardValues = [
 ];
 
 function App() {
+  const [cardsArray, setCardsArray] = useState([]);
+
+  const shuffle = () => {
+    const newCardArray = [...cardValues, ...cardValues]
+
+      .sort(() => Math.random() - (.5))
+
+      .map((cardMap) => ({ ...cardMap, id: Math.random() }));
+
+    setCardsArray(newCardArray);
+  };
+
+
   return (
     <div className="App">
       <h1>Memory Game!</h1>
-      <button >New Game</button>
+      <button onClick={shuffle}>New Game</button>
 
       <div className="card-grid">
-        {cardValues.map((Map) => (
+        {cardsArray.map((Map) => (
           <Card key={Map.id} prop={Map} ></Card>
         ))}
       </div>
