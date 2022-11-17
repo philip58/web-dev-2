@@ -19,6 +19,8 @@ function App() {
 
   const [turnsPassed, setTurnsPassed] = useState(0);
 
+  const [disableCard, setDisableCard] = useState(false);
+
   const shuffle = () => {
     const newCardArray = [...cardValues, ...cardValues]
 
@@ -43,10 +45,12 @@ function App() {
     setFirstCard(null);
     setSecondCard(null);
     setTurnsPassed((currentTurns) => currentTurns + 1);
+    setDisableCard(false);
   };
 
   useEffect(() => {
     if (firstCard && secondCard) {
+      setDisableCard(true);
       if (firstCard.src === secondCard.src) {
         setCardsArray(cards => {
           return cards.map((Map) => {
@@ -63,12 +67,10 @@ function App() {
         })
         nextTurn();
       } else {
-        nextTurn();
+        setTimeout(() => nextTurn(), 850);
       }
     }
   }, [firstCard, secondCard]);
-
-  console.log(cardsArray)
 
   return (
     <div className="App">
@@ -79,7 +81,8 @@ function App() {
         {cardsArray.map((Map) => (
           <Card key={Map.id} prop={Map} 
           chooseCard={chooseCard} 
-          isFlipped={Map.match === true || Map === firstCard || Map === secondCard}>
+          isFlipped={Map.match === true || Map === firstCard || Map === secondCard}
+          isDisabled={disableCard}>
           </Card>
         ))}
       </div>

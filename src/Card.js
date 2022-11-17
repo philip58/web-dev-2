@@ -1,8 +1,11 @@
 import "./Card.css";
 
-function Card({prop, chooseCard, isFlipped}) {
+function Card({prop, chooseCard, isFlipped, isDisabled}) {
     const click = () => {
+        if(isDisabled === false)
+        {
         chooseCard(prop);
+        }
     }
     const flip = (check) => {
         if(check === true)
