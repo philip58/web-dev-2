@@ -11,6 +11,8 @@ const cardValues = [
 ];
 
 function App() {
+  useEffect(() => { shuffle(); },[]);
+
   const [firstCard, setFirstCard] = useState(null);
 
   const [secondCard, setSecondCard] = useState(null);
