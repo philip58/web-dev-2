@@ -1,0 +1,17 @@
+.front {
+    margin-top: 10px;
+    display: block;
+    background-color: lightcyan;
+    height: 200px;
+    width: 200px;
+    border: solid 2px lightblue;
+  }
+  
+  .back {
+    margin-top: 10px;
+    display: block;
+    background-color: black;
+    height: 200px;
+    width: 200px;
+    border: solid 2px black;
+  }
