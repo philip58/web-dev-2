@@ -1,17 +1,23 @@
 .front {
-    margin-top: 10px;
+    margin-top: px;
     display: block;
     background-color: lightcyan;
     height: 200px;
     width: 200px;
     border: solid 2px lightblue;
+    position: absolute;
+    transform: rotateY(90deg);
   }
   
   .back {
-    margin-top: 10px;
+    margin-top: 5px;
     display: block;
     background-color: black;
     height: 200px;
     width: 200px;
     border: solid 2px black;
+  }
+
+  .flip .front{
+    transform: rotateX(0deg)
   }

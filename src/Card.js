@@ -1,11 +1,24 @@
 import "./Card.css";
 
-function Card({prop}) {
+function Card({prop, chooseCard, isFlipped}) {
+    const click = () => {
+        chooseCard(prop);
+    }
+    const flip = (check) => {
+        if(check === true)
+        {
+            return "flip";
+        }
+        else
+        {
+            return "";
+        }
+    }
     return (
-  <div className="card">
-    <div>
+  <div>
+    <div className={flip(isFlipped)}>
       <img className="front" src={prop.src} />
-      <img className="back" src="/back.png"/>
+      <img className="back" src="/back.png" onClick={click}/>
     </div>
   </div>
     )
