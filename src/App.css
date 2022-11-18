@@ -3,6 +3,7 @@
 }
 
 .card-grid {
+  margin-left: 35px;
   margin-top: 35px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
