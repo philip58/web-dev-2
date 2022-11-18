@@ -39,6 +39,8 @@ function App() {
     setFirstCard(null);
 
     setSecondCard(null);
+
+    setNumberOfMatches(0);
   };
 
   const chooseCard = (choice) => {
@@ -82,7 +84,13 @@ function App() {
     }
   }, [firstCard, secondCard]);
 
-  
+  const win = () => {
+    if(numberOfMatches === 5)
+    {
+      return true;
+    }
+    else return false;
+  }
 
   return (
     <div className="App">
@@ -90,6 +98,7 @@ function App() {
       <button onClick={shuffle}>New Game</button>
       <p>Turns Passed: {turnsPassed} </p>
       <p>Number of Matches: {numberOfMatches} </p>
+      <h1>{win() ? "Congrats! You Win!!!" : ""}</h1>
 
       <div className="card-grid">
         {cardsArray.map((Map) => (
