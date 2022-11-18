@@ -32,7 +32,7 @@ function App() {
 
     setCardsArray(newCardArray);
 
-    setTurnsPassed(0);
+    setTimeout(() => setTurnsPassed(0),850);
 
     setFirstCard(null);
 
@@ -47,10 +47,11 @@ function App() {
     }
   };
 
+
   const nextTurn = () => {
+    setTurnsPassed((currentTurns) => currentTurns + 1);
     setFirstCard(null);
     setSecondCard(null);
-    setTurnsPassed((currentTurns) => currentTurns + 1);
     setDisableCard(false);
   };
 
