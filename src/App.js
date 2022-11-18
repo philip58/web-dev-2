@@ -23,6 +23,8 @@ function App() {
 
   const [disableCard, setDisableCard] = useState(false);
 
+  const [numberOfMatches, setNumberOfMatches] = useState(0);
+
   const shuffle = () => {
     const newCardArray = [...cardValues, ...cardValues]
 
@@ -37,6 +39,8 @@ function App() {
     setFirstCard(null);
 
     setSecondCard(null);
+
+    setNumberOfMatches(0);
   };
 
   const chooseCard = (choice) => {
@@ -59,6 +63,7 @@ function App() {
     if (firstCard && secondCard) {
       setDisableCard(true);
       if (firstCard.src === secondCard.src) {
+        setNumberOfMatches((number) => number + 1)
         setCardsArray(cards => {
           return cards.map((Map) => {
             if(Map.src === firstCard.src && Map.src === secondCard.src)
@@ -79,11 +84,21 @@ function App() {
     }
   }, [firstCard, secondCard]);
 
+  const win = () => {
+    if(numberOfMatches === 5)
+    {
+      return true;
+    }
+    else return false;
+  }
+
   return (
     <div className="App">
       <h1>Memory Game!</h1>
       <button onClick={shuffle}>New Game</button>
       <p>Turns Passed: {turnsPassed} </p>
+      <p>Number of Matches: {numberOfMatches} </p>
+      <h1>{win() ? "Congrats! You Win!!!" : ""}</h1>
 
       <div className="card-grid">
         {cardsArray.map((Map) => (
