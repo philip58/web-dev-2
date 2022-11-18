@@ -40,7 +40,7 @@ function App() {
 
     setSecondCard(null);
 
-    setNumberOfMatches(0);
+    setTimeout(() => setNumberOfMatches(0),850);
   };
 
   const chooseCard = (choice) => {
@@ -98,7 +98,7 @@ function App() {
       <button onClick={shuffle}>New Game</button>
       <p>Turns Passed: {turnsPassed} </p>
       <p>Number of Matches: {numberOfMatches} </p>
-      <h1>{win() ? "Congrats! You Win!!!" : ""}</h1>
+      <h1>{win() ? "Congrats! You Win!!! Click New Game To Restart" : ""}</h1>
 
       <div className="card-grid">
         {cardsArray.map((Map) => (
